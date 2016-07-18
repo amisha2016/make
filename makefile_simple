@@ -1,0 +1,29 @@
+#Variables
+#Compiler to use
+CC=gcc
+
+#Compiler flag
+CFLAGS=-I.
+
+#Special targets
+.PHONY: clean 
+
+#list of all the files made by makefile
+lst=hellomake hellomake.o hellofunc.o
+
+#Main target
+all:hellomake
+
+#Sub-targets
+hellomake:hellomake.o hellofunc.o
+		$(CC) $(CFLAGS) -o hellomake hellomake.o hellofunc.o
+
+hellomake.o:hellomake.c hellomake.h
+		$(CC) $(CFLAGS) -c hellomake.c
+
+hellofunc.o:hellofunc.c hellomake.h
+		$(CC) $(CFLAGS) -c hellofunc.c
+
+#Remove all the file made by makefile
+clean:
+		rm ${lst}

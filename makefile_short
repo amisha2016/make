@@ -1,0 +1,28 @@
+#Variables
+#Compiler to use
+CC=gcc
+#Compiler flag
+CFLAGS=-I.
+DEPS = hellomake.h
+OBJ=hellomake.o hellofunc.o
+OUTPUT_FILE=hellomake
+
+#List of all files made by makefile                                     
+lst= $(OUTPUT_FILE) $(OBJ)
+
+#Special targets
+.PHONY: clean
+
+#Main-target
+all: $(OUTPUT_FILE)
+
+#Sub-target
+hellomake: $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS)
+
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+#Remove all the file made by makefile                                   
+clean:                                                                  
+	rm ${lst}  
